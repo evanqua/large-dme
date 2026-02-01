@@ -61,16 +61,21 @@ function onFormSubmit(e) {
       const rowItem = (row[2] === "Donate") ? row[8] : row[9];
       const rowEmail = row[1];
       
+      // Handle the person who submitted the form
       if (normalize(rowEmail) === normalize(optOutEmail) && normalize(rowItem) === normalize(optOutItem)) {
         foundInMain = true;
         mainSheet.getRange(i + 1, colIndices.optOut + 1).setValue(STATUS_OPTED_OUT);
         mainSheet.getRange(i + 1, colIndices.success + 1).setValue(wasSuccessful);
       }
       
+      // Handle the Partner Email (Column G)
       if (partnerEmail && normalize(rowEmail) === normalize(partnerEmail) && normalize(rowItem) === normalize(optOutItem)) {
         if (row[colIndices.optOut] !== STATUS_OPTED_OUT) {
           mainSheet.getRange(i + 1, colIndices.optOut + 1).setValue(STATUS_OPTED_OUT);
           mainSheet.getRange(i + 1, colIndices.success + 1).setValue("Yes");
+          
+          // --- NEW: Trigger notification to the Partner ---
+          sendPartnerOptOutNotification(rowEmail, row[3], optOutEmail, optOutItem);
         }
       }
     }
