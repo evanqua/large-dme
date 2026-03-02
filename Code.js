@@ -329,7 +329,7 @@ function sendSubmitterEmail(email, name, item, matches, headers, colIndices) {
 function sendpartneroptoutnotification(recipientEmail, recipientName, optedOutBy, itemName) {
   const subject = `Notification: Opt-Out for ${itemName}`;
   const body = `<p>Hello ${recipientName || ''},</p>
-                <p>The person you were matched with has been opted out of their listing for <b>${itemName}</b> on behalf of <b>${optedOutBy}</b>.</p>
+                <p>You have been opted out of your listing for <b>${itemName}</b> on behalf of <b>${optedOutBy}</b>.</p>
                 <p>If you believe this is a mistake, please reach out to <a href="mailto:oakland@recares.org">oakland@recares.org</a>.</p>
                 <p>ReCARES Large DME System</p>`;
 
